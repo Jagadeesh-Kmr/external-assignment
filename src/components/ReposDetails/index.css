@@ -1,0 +1,53 @@
+.repos-list {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.repos-h1 {
+  font-size: 32px;
+  color: #ffffff;
+}
+
+.paragraph-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  min-width: 1040px;
+}
+
+.desc {
+  font-family: 'Poppins';
+  font-size: 16px;
+  color: #ffffff;
+  width: 240px;
+}
+
+.input-container {
+  display: flex;
+  align-items: center;
+  width: 30px;
+  margin-right: 200px;
+}
+
+.input-label {
+  color: #ffffff;
+  margin-left: 5px;
+  margin-right: 20px;
+}
+
+.radio-input {
+  margin-right: 5px;
+}
+
+.custom-song-input {
+  border: 1px solid #ffffff;
+  background-color: transparent;
+  border-radius: 6px;
+  height: 24px;
+  text-align: center;
+  color: #ffffff;
+  padding: 6px;
+}

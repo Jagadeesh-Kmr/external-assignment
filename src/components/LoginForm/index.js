@@ -4,8 +4,6 @@ import {Redirect} from 'react-router-dom'
 
 import './index.css'
 
-const websiteLoginForm = 'https://assets.ccbp.in/frontend/react-js/logo-img.png'
-
 class LoginForm extends Component {
   state = {
     username: '',
@@ -25,8 +23,9 @@ class LoginForm extends Component {
   onSubmitSuccess = jwtToken => {
     const {history} = this.props
 
-    Cookies.set('jwt_token', jwtToken, {expires: 30, path: '/'})
-
+    Cookies.set('jwt_token', jwtToken, {
+      expires: 30,
+    })
     history.replace('/')
   }
 
@@ -52,47 +51,80 @@ class LoginForm extends Component {
     }
   }
 
+  renderPasswordField = () => {
+    const {password} = this.state
+
+    return (
+      <>
+        <label className="input-label" htmlFor="password">
+          PASSWORD
+        </label>
+        <input
+          type="password"
+          id="password"
+          className="password-input-field"
+          value={password}
+          onChange={this.onChangePassword}
+          placeholder="Password"
+        />
+      </>
+    )
+  }
+
+  renderUsernameField = () => {
+    const {username} = this.state
+
+    return (
+      <>
+        <label className="input-label" htmlFor="username">
+          USERNAME
+        </label>
+        <input
+          type="text"
+          id="username"
+          className="username-input-field"
+          value={username}
+          onChange={this.onChangeUsername}
+          placeholder="Username"
+        />
+      </>
+    )
+  }
+
   render() {
-    const {username, password, showSubmitError, errorMsg} = this.state
+    const {showSubmitError, errorMsg} = this.state
     const jwtToken = Cookies.get('jwt_token')
+
     if (jwtToken !== undefined) {
       return <Redirect to="/" />
     }
+
     return (
-      <div className="login-container">
-        <form className="login-form-container" onSubmit={this.submitForm}>
-          <div className="form-logo-container">
-            <img src={websiteLoginForm} alt="website logo" />
-          </div>
-          <label className="form-label" htmlFor="username">
-            USERNAME
-          </label>
-          <br />
-          <input
-            type="text"
-            id="username"
-            className="form-input"
-            value={username}
-            onChange={this.onChangeUsername}
-            placeholder="username"
+      <div className="login-form-container">
+        <img
+          src="https://assets.ccbp.in/frontend/react-js/nxt-trendz-logo-img.png"
+          className="login-website-logo-mobile-img"
+          alt="website logo"
+        />
+        <img
+          src=" https://blog.converted.in/hubfs/Mobile%20Commerce.jpg "
+          className="login-img login-mb-img-none"
+          alt="website login"
+        />
+        <img
+          src="https://img.freepik.com/free-vector/ecommerce-web-page-concept-illustration_114360-8204.jpg"
+          className="login-img login-lp-img-none"
+          alt="website login "
+        />
+        <form className="form-container" onSubmit={this.submitForm}>
+          <img
+            src="https://assets.ccbp.in/frontend/react-js/nxt-trendz-logo-img.png"
+            className="login-website-logo-desktop-img"
+            alt="website logo"
           />
-          <br />
-          <br />
-          <label className="form-label" htmlFor="password">
-            PASSWORD
-          </label>
-          <br />
-          <input
-            type="password"
-            id="password"
-            className="form-input"
-            value={password}
-            onChange={this.onChangePassword}
-            placeholder="password"
-          />
-          <br />
-          <br />
-          <button className="form-submit-btn" type="submit">
+          <div className="input-container">{this.renderUsernameField()}</div>
+          <div className="input-container">{this.renderPasswordField()}</div>
+          <button type="submit" className="login-button">
             Login
           </button>
           {showSubmitError && <p className="error-message">*{errorMsg}</p>}
