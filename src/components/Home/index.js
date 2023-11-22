@@ -31,13 +31,24 @@ class Home extends Component {
       const fetchedData = await response.json()
       console.log(fetchedData)
 
-      const updatedData = [fetchedData.data].map(eachData => ({
-        id: eachData.id,
-        name: eachData.name,
-        location: eachData.location,
-        chargeCustomers: eachData.charge_customers,
-      }))
+      const updatedData = {
+        otherDetails: [fetchedData.data].map(eachData => ({
+          id: eachData.id,
+          name: eachData.name,
+          location: eachData.location,
+          chargeCustomers: eachData.charge_customers,
+        })),
+        amount: [fetchedData.data.amount].map(eachData => ({
+          amount_1: eachData.category_6,
+          amount_2: eachData.category_7,
+          amount_3: eachData.category_8,
+          amount_4: eachData.category_9,
+          amount_5: eachData.category_10,
+        })),
+      }
+
       console.log(updatedData)
+
       this.setState({
         apiStatus: apiStatusConstants.success,
         reposData: updatedData,
@@ -71,9 +82,7 @@ class Home extends Component {
 
     return (
       <ul className="repositories-list">
-        {reposData.map(eachData => (
-          <ReposDetails key={eachData.id} reposDetails={eachData} />
-        ))}
+        <ReposDetails reposDetails={reposData.otherDetails} />
       </ul>
     )
   }
