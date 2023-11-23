@@ -13,7 +13,7 @@ const apiStatusConstants = {
 
 class Home extends Component {
   state = {
-    reposData: [],
+    otherDetail: [],
   }
 
   componentDidMount() {
@@ -31,6 +31,12 @@ class Home extends Component {
       const fetchedData = await response.json()
       console.log(fetchedData)
 
+      const updatedOtherDetails = [fetchedData.data].map(eachData => ({
+        id: eachData.id,
+        name: eachData.name,
+        location: eachData.location,
+      }))
+
       const updatedData = {
         otherDetails: [fetchedData.data].map(eachData => ({
           id: eachData.id,
@@ -46,12 +52,11 @@ class Home extends Component {
           amount_5: eachData.category_10,
         })),
       }
-
       console.log(updatedData)
 
       this.setState({
         apiStatus: apiStatusConstants.success,
-        reposData: updatedData,
+        otherDetail: updatedOtherDetails,
       })
     } else {
       this.setState({
@@ -78,11 +83,13 @@ class Home extends Component {
   )
 
   renderSuccessView = () => {
-    const {reposData} = this.state
+    const {otherDetail} = this.state
 
     return (
       <ul className="repositories-list">
-        <ReposDetails reposDetails={reposData.otherDetails} />
+        {otherDetail.map(eachData => (
+          <ReposDetails key={eachData.id} otherReposDetails={eachData} />
+        ))}
       </ul>
     )
   }

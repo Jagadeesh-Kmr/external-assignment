@@ -1,10 +1,10 @@
-// import {Route, Switch} from 'react-router-dom'
+import {Route, Switch} from 'react-router-dom'
 import {Component} from 'react'
 import CreateContext from './Context/CreateContext'
 
 import './App.css'
 
-// import LoginForm from './components/LoginForm'
+import LoginForm from './components/LoginForm'
 import Home from './components/Home'
 
 class App extends Component {
@@ -25,7 +25,10 @@ class App extends Component {
           toggleImg: this.toggleImg,
         }}
       >
-        <Home />
+        <Switch>
+          <Route exact path="/login" component={LoginForm} />
+          <Route exact path="/" component={Home} />
+        </Switch>
       </CreateContext.Provider>
     )
   }

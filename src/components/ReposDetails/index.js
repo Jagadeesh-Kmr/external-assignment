@@ -16,13 +16,15 @@ class ReposDetails extends Component {
   }
 
   render() {
-    const {reposDetails} = this.props
+    const {otherReposDetails} = this.props
+    const {name, location} = otherReposDetails
 
     return (
       <>
         <li className="repos-list">
           <h1 className="repos-h1">
-            {reposDetails.name}, <span>{reposDetails.location}</span>
+            {name}
+            <span>{location}</span>
           </h1>
           <div className="paragraph-container">
             <p className="desc">
