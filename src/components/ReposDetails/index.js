@@ -1,6 +1,10 @@
+import {withRouter} from 'react-router-dom'
+
 import {Component} from 'react'
 
 import './index.css'
+
+import Cookies from 'js-cookie'
 
 class ReposDetails extends Component {
   state = {
@@ -19,12 +23,17 @@ class ReposDetails extends Component {
     const {otherReposDetails} = this.props
     const {name, location} = otherReposDetails
 
+    const onClickLogout = () => {
+      const {history} = this.props
+      Cookies.remove('jwt_token')
+      history.replace('/login')
+    }
+
     return (
       <>
         <li className="repos-list">
           <h1 className="repos-h1">
-            {name}
-            <span>{location}</span>
+            {name},<span> {location}</span>
           </h1>
           <div className="paragraph-container">
             <p className="desc">
@@ -61,10 +70,14 @@ class ReposDetails extends Component {
               <button type="button">amount</button>
             </div>
           </div>
+
+          <button type="button" onClick={onClickLogout}>
+            Logout
+          </button>
         </li>
       </>
     )
   }
 }
 
-export default ReposDetails
+export default withRouter(ReposDetails)

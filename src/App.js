@@ -26,7 +26,7 @@ class App extends Component {
         }}
       >
         <Switch>
-          <Route exact path="/login" component={LoginForm} />
+          <Route path="/login" component={LoginForm} />
           <Route exact path="/" component={Home} />
         </Switch>
       </CreateContext.Provider>
